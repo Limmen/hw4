@@ -5,6 +5,8 @@
 */
 package limmen.hw4.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,6 +18,7 @@ import limmen.hw4.model.Converter;
  * All calls to the model go through here.
  * Buisness interface:
  * float convert(float amount, String fromCurrency, toCurrency)
+ * List<String> getCurrencies()
  * @author kim
  */
 @Stateless
@@ -54,6 +57,17 @@ public class ConversionRateFacade extends AbstractFacade<ConversionRate> {
             ConversionRate from = super.find(convertFromCurrency);
             ConversionRate to = super.find(convertToCurrency);
             return converter.convert(amount, from, to);        
-    }    
+    }  
+    
+    public List<String> getCurrencies(){
+        List<ConversionRate> rates = super.findAll();
+        List<String> currencies = new ArrayList();
+        for(ConversionRate rate : rates)
+            currencies.add(rate.getCurrency());
+        return currencies;
+    }
+    public void test(){
+        System.out.println("test");
+    }
     
 }

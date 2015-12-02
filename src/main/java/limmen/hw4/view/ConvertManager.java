@@ -7,6 +7,8 @@ package limmen.hw4.view;
 
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import limmen.hw4.controller.ConversionRateFacade;
@@ -25,8 +27,15 @@ public class ConvertManager implements Serializable {
     private Float convertToAmount;
     private String convertFromCurrency;
     private String convertToCurrency;
-    private boolean dberror = false;    
-
+    private boolean dberror = false;   
+    private List<String> currencies;    
+     
+    @PostConstruct
+    public void init() {
+        contr.test();
+        currencies = contr.getCurrencies();
+        System.out.println("currencies size: " + currencies.size());
+    }
     /*
     * Getters and setters
     */
@@ -56,7 +65,12 @@ public class ConvertManager implements Serializable {
     }
     public boolean isDberror() {
         return dberror;
-    }    
+    }
+    public List<String> getCurrencies() {
+        //currencies.add("tesst");
+        return currencies;
+    }
+    
 
     /**
      * Calls the EJB to convert the currency.
