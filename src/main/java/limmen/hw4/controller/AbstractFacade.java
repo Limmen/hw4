@@ -9,7 +9,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 /**
- *
+ * Contains commonly used methods to interact with the persistence context.
  * @author kim
  */
 public abstract class AbstractFacade<T> {

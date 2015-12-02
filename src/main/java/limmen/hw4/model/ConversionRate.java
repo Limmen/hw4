@@ -12,7 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- *
+ * Entity classs that represents ConversionRate table in the database.
+ * A instance represents a row in the database.
  * @author kim
  */
 @Entity
@@ -24,38 +25,33 @@ public class ConversionRate implements Serializable {
     private float toRate;
     private float fromRate;
 
-
+    /**
+     * Getters and Setters
+     */
     public String getCurrency() {
         return currency;
     }
-
     public void setCurrency(String currency) {
         this.currency = currency;
     }
-
     public float getToRate() {
         return toRate;
     }
-
     public void setToRate(float toRate) {
         this.toRate = toRate;
     }
-
     public float getFromRate() {
         return fromRate;
     }
-
     public void setFromRate(float fromRate) {
         this.fromRate = fromRate;
     }
-
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (currency != null ? currency.hashCode() : 0);
         return hash;
     }
-
     @Override
     public boolean equals(Object object) {
         if (!(object instanceof ConversionRate)) {
@@ -67,7 +63,6 @@ public class ConversionRate implements Serializable {
         }
         return true;
     }
-
     @Override
     public String toString() {
         return "limmen.hw4.model.ConversionRate[ id=" + currency + " ]";
