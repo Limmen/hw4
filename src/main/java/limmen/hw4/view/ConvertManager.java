@@ -9,7 +9,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import javax.ejb.EJB;
-import limmen.hw4.controller.ConvertController;
+import limmen.hw4.controller.ConversionRateFacade;
 
 /**
  *
@@ -19,7 +19,7 @@ import limmen.hw4.controller.ConvertController;
 @SessionScoped
 public class ConvertManager implements Serializable {
     @EJB
-    private ConvertController contr;
+    private ConversionRateFacade contr;
     private Float convertFromAmount;
     private Float convertToAmount;
     private String convertFromCurrency;
@@ -28,9 +28,7 @@ public class ConvertManager implements Serializable {
     
     public ConvertManager() {
         
-    }
-
-    
+    }    
     public String getConvertFromCurrency() {
         return convertFromCurrency;
     }
@@ -48,7 +46,7 @@ public class ConvertManager implements Serializable {
     }
     
     public Float getConvertFromAmount() {
-        return null;
+       return null;
     }
 
     public void setConvertFromAmount(Float convertFromAmount) {
@@ -63,7 +61,7 @@ public class ConvertManager implements Serializable {
         this.convertToAmount = convertToAmount;
     }    
     public Float convert(){
-        convertToAmount = contr.convertSEKtoEUR(convertFromAmount);
+        convertToAmount = contr.convert(convertFromAmount, convertFromCurrency, convertToCurrency);
         return convertToAmount;
     }
 }
