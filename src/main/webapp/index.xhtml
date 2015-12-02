@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:outputStylesheet library="css" name="style.css"  />
+   
+    <h:head>
+        <title>HomeWork4 - Currency converter</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p><h:outputLabel value="From" styleClass="from"/> <h:outputLabel value="To" styleClass="to"/> </p>
+            <select id="currenciesFrom" value="#{convertManager.convertFromCurrency}" >
+                <option value="SEK">SEK</option>
+                <option value="EUR €">EUR €</option>
+                <option value="Dollar $">Dollar $</option>
+                <option value="Pound £">Pound £</option>
+            </select>
+            <select id="currenciesTo" value="#{convertManager.convertToCurrency}">
+                <option value="SEK">SEK</option>
+                <option value="EUR €">EUR €</option>
+                <option value="Dollar $">Dollar $</option>
+                <option value="Pound £">Pound £</option>
+            </select>
+            <p>
+                <h:inputText id="convertFrom" value="#{convertManager.convertFromAmount}"/>
+                <h:inputText id="convertTo" value="#{convertManager.convertToAmount}" readonly="true"/>
+            </p>
+            <p>
+                <h:commandButton value="Convert" action="#{convertManager.convert}"/>
+            </p>
+        </h:form>
+    </h:body>
+</html>
+
