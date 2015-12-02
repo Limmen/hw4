@@ -24,7 +24,7 @@ public class ConvertManager implements Serializable {
     private Float convertToAmount;
     private String convertFromCurrency;
     private String convertToCurrency;
-    
+    private boolean dberror = false;
     
     public ConvertManager() {
         
@@ -60,12 +60,21 @@ public class ConvertManager implements Serializable {
     public void setConvertToAmount(Float convertToAmount) {
         this.convertToAmount = convertToAmount;
     }
-    public Float convert(){
+
+    public boolean isDberror() {
+        return dberror;
+    }    
+    public void convert(){
+        dberror = false;
         if(convertFromCurrency.equals(convertToCurrency))
             convertToAmount = convertFromAmount;
         else{
-            convertToAmount = contr.convert(convertFromAmount, convertFromCurrency, convertToCurrency);
-        }
-        return convertToAmount;
+            try{
+                convertToAmount = contr.convert(convertFromAmount, convertFromCurrency, convertToCurrency);
+            }
+            catch(Exception e){
+                dberror = true;
+            }
+        } 
     }
 }

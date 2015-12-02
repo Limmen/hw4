@@ -26,19 +26,13 @@ public class ConversionRateFacade extends AbstractFacade<ConversionRate> {
         return em;
     }
     
-    public float convert(float amount, String convertFromCurrency, String convertToCurrency){
-        try {
+    public float convert(float amount, String convertFromCurrency, String convertToCurrency) throws Exception{        
             ConversionRate from = super.find(convertFromCurrency);
             ConversionRate to = super.find(convertToCurrency);
-            return converter.convert(amount, from, to);
-        }
-        catch(Exception e){
-            e.printStackTrace();
-            return 404;
-        }
+            return converter.convert(amount, from, to);        
     }
     
-    public ConversionRateFacade() {
+    public ConversionRateFacade(){
         super(ConversionRate.class);
     }
     
