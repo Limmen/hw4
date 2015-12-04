@@ -10,17 +10,19 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import limmen.hw4.controller.ConversionRateFacade;
 
 /**
  * CDI-bean representing the conversion-application.
+ * Request scoped since it does'nt handle any client-specific data or
+ * sessions. (scope represents the lifetime of the bean).
  * @author kim
  */
 @Named(value = "convertManager")
-@SessionScoped
+@RequestScoped
 public class ConvertManager implements Serializable {
-    //dependency injection to bontain reference to controller
+    //dependency injection to obtain reference to controller-buisness-interface.
     @EJB
     private ConversionRateFacade contr;
     private Float convertFromAmount;
@@ -30,11 +32,12 @@ public class ConvertManager implements Serializable {
     private boolean dberror = false;   
     private List<String> currencies;    
      
+    /*currencies need to be requested when the bean is fullt initialized
+    with all it's dependencies, that's why this method is called here and
+    not in the constructor.*/
     @PostConstruct
     public void init() {
-        contr.test();
         currencies = contr.getCurrencies();
-        System.out.println("currencies size: " + currencies.size());
     }
     /*
     * Getters and setters
@@ -66,14 +69,11 @@ public class ConvertManager implements Serializable {
     public boolean isDberror() {
         return dberror;
     }
-    public List<String> getCurrencies() {
-        //currencies.add("tesst");
+    public List<String> getCurrencies() {   
         return currencies;
-    }
-    
-
+    }    
     /**
-     * Calls the EJB to convert the currency.
+     * Calls the EJB-buisness interface to convert the currency.
      * Will catch database-exceptions and set error-flag.
      */
     public void convert(){

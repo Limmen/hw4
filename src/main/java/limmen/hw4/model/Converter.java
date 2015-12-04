@@ -18,7 +18,7 @@ public class Converter {
      * @param amount
      * @param from
      * @param to
-     * @return
+     * @return converted amount
      */
     public float convert(float amount, ConversionRate from, ConversionRate to){
         float temp = amount*from.getToRate();

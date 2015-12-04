@@ -16,7 +16,12 @@ import limmen.hw4.model.Converter;
 /**
  * A controller and a facade for the buisness-logic.
  * All calls to the model go through here.
- * Buisness interface:
+ * Stateless session EJB that represents a single client inside the application-
+ * server. Stateless since it handles only a single request, there is no
+ * request-state that needs to be stored.
+ * No interface-implementation-statement, instead all public methods are
+ * automaticly exposed to the client.
+ * Buisness interface (the methods used by client):
  * float convert(float amount, String fromCurrency, toCurrency)
  * List<String> getCurrencies()
  * @author kim
@@ -59,15 +64,16 @@ public class ConversionRateFacade extends AbstractFacade<ConversionRate> {
             return converter.convert(amount, from, to);        
     }  
     
+    /**
+     *Method to fetch currencies from database.
+     * @return list of currencies <String>
+     */
     public List<String> getCurrencies(){
         List<ConversionRate> rates = super.findAll();
         List<String> currencies = new ArrayList();
         for(ConversionRate rate : rates)
             currencies.add(rate.getCurrency());
         return currencies;
-    }
-    public void test(){
-        System.out.println("test");
     }
     
 }
