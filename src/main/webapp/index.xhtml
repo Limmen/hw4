@@ -18,7 +18,9 @@
                  <f:selectItems value="#{convertManager.currencies}" />                                   
             </h:selectOneMenu>
             <p>
-                <h:inputText id="convertFrom" value="#{convertManager.convertFromAmount}"/>
+                <h:inputText id="convertFrom" value="#{convertManager.convertFromAmount}" required="true" requiredMessage="Please enter amount to convert">
+                    <f:validator validatorId="currencyValidator" />
+                </h:inputText>
                 <h:inputText id="convertTo" value="#{convertManager.convertToAmount}" readonly="true"/>
             </p>
             <p>

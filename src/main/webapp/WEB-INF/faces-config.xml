@@ -10,4 +10,8 @@
             <to-view-id>/500.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    <validator>
+<validator-id>currencyValidator</validator-id>
+<validator-class>limmen.hw4.view.CurrencyValidator</validator-class>
+</validator>
 </faces-config>
