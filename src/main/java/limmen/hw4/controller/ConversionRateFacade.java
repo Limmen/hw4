@@ -29,7 +29,7 @@ import limmen.hw4.model.Converter;
 @Stateless
 public class ConversionRateFacade extends AbstractFacade<ConversionRate> {
     @PersistenceContext(unitName = "hw4PU")
-    private EntityManager em;
+    protected EntityManager em;
     private final Converter converter = new Converter();
    /**
      *Constructor. Initializes the superclass.
